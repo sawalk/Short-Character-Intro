@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>Short Character Intro</name>
+    <directory>short character intro</directory>
+    <id>3432180720</id>
+    <description>The 'Home' key shows a brief description of the character you are currently playing. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2681875787]Mod Config Menu Pure[/url] allows you to replace the toggle key with another key.
+    
+    Currently, only Korean is supported.</description>
+    <version>1.4</version>
+    <visibility>Friends Only</visibility>
+    <tag id="Lua"/>
+    <tag id="Tweaks"/>
+    <tag id="Graphics"/>
+</metadata>
