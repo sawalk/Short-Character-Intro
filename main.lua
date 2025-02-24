@@ -66,9 +66,19 @@ mod:AddPriorityCallback(
 )
 
 
------- 스프라이트 로드 & 정리 ------
-local sprite = Sprite()
-sprite:Load("Short Character Intro/popup_characterdescriptions.anm2")
+------ 구현 ------
+local function LoadSprite()
+    local player = Isaac.GetPlayer(0)
+    local sprite = Sprite()
+
+    if player:GetPlayerType() < 41 then
+        sprite:Load("kr/popup_character descriptions.anm2")    -- 일반 캐릭터
+    else
+        sprite:Load("kr/popup_workshop descriptions.anm2")    -- 모드 캐릭터
+    end
+end
+
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, LoadSprite)
 
 local function GetScreenSize()
     local room = Game():GetRoom()
@@ -78,13 +88,18 @@ local function GetScreenSize()
     return Vector(rx*2 + 13*26, ry*2 + 7*26)
 end
 
-
------- 구현 ------
 mod.currentAnim = nil      -- 현재 재생중인 애니메이션 이름
 mod.isAnimating = false    -- 애니메이션이 재생 중인지
 mod.showIn = true          -- 토글 상태: true면 다음은 인 애니메이션, false면 아웃 애니메이션
 
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
+    local player = Isaac.GetPlayer(0)
+    local sprite = Sprite()
+
+    if not sprite:IsLoaded() then
+        LoadSprite()
+    end
+
     if mod.currentAnim then
         if not sprite:IsFinished(mod.currentAnim) then    -- 애니메이션이 아직 끝나지 않았다면 업데이트
             sprite:Update()
@@ -92,36 +107,42 @@ mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
             mod.isAnimating = false
         end
 
+        local scale = 0.75
         if Options.MaxScale == 1 or Options.MaxScale == 2 then
-            sprite.Scale = Vector(0.5, 0.5)
+            scale = 0.5
         elseif Options.MaxScale == 3 then
-            sprite.Scale = Vector(0.666666, 0.666666)
-        else
-            sprite.Scale = Vector(0.75, 0.75)
+            scale = 0.666666
         end
         
+        sprite.Scale = Vector(scale, scale)
         sprite.Color = Color(1, 1, 1, 1, 0, 0, 0)
-        sprite:Render(Vector(GetScreenSize().X/2, GetScreenSize().Y/3.333333), Vector(0,0), Vector(0,0))
-    end
-end)
 
-mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, function(_, player)
+        local screenSize = GetScreenSize()
+        sprite:Render(Vector(screenSize.X / 1.98, screenSize.Y / 3.333333), Vector(0,0), Vector(0,0))
+    end
+
     if Input.IsButtonTriggered(mod.config.toggleKey, 0) then
         if mod.isAnimating then return end    -- 만약 애니메이션이 재생 중이면 새 입력은 무시
 
-        local playerType = player:GetPlayerType()
-        if mod.showIn then
-            mod.currentAnim = playerType .. "_In"
-            mod.playsfx = 17
+        local suffix = mod.showIn and "_In" or "_Out"
+        local playsfx = mod.showIn and 17 or 18
+
+        if player:GetPlayerType() > 40 then    -- 모드 캐릭터라면
+            if FiendFolio and player:GetPlayerType() == FiendFolio.PLAYER.BIEND then    -- 더럽혀진 핀드와 핀드의 이름이 동일하므로
+                mod.currentAnim = "CUSTOM_Biend" .. suffix
+            else
+                mod.currentAnim = "CUSTOM_" .. player:GetName() .. suffix
+            end
         else
-            mod.currentAnim = playerType .. "_Out"
-            mod.playsfx = 18
+            mod.currentAnim = player:GetPlayerType() .. suffix
         end
 
-        sprite:Play(mod.currentAnim, false)
-        SFXManager():Play(mod.playsfx, 0.5)
+        if mod.currentAnim and player:GetName() ~= "[TECHNICAL] C-Side Detect" then    -- 에피파니 전용 캐릭터 화면은 제외
+            sprite:Play(mod.currentAnim, false)
+            SFXManager():Play(playsfx, 0.5)
+        end
+        
         mod.isAnimating = true
-
         mod.showIn = not mod.showIn
     end
 end)

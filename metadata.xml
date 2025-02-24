@@ -3,11 +3,28 @@
     <name>Short Character Intro</name>
     <directory>short character intro</directory>
     <id>3432180720</id>
-    <description>The 'Home' key shows a brief description of the character you are currently playing. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2681875787]Mod Config Menu Pure[/url] allows you to replace the toggle key with another key.
-    
-    Currently, only Korean is supported.</description>
-    <version>1.4</version>
-    <visibility>Friends Only</visibility>
+    <description>[h2][b]　What is this[/b][/h2]
+[code][b]The 'Home' key shows a brief description of the character you are currently playing. You can change the toggle key with another key with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2681875787]Mod Config Menu Pure[/url]. Currently, we only support Korean. English will be available in the future.
+[hr][/hr]Source code: https://github.com/sawalk/Short-Character-Intro (Commits slower than actual development progress.)[/b][/code]
+
+[h2][b]　Roadmap[/b][/h2]  　  We will be updating in the following order The first update will take place in early March.
+[code][b]1. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3012430463]Epiphany[/url]
+2. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3260980911]Astrobirth[/url]
+3. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2851063440]Fiend Folio: Reheated[/url]
+4. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2543118811]Pudding And Wakaba[/url]
+5. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2722017893]Andromeda[/url]
+6. English descriptions of TBoI:R character　　　 　　 -- End of 1st update list, the above mods support Korean descriptions.
+7. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2548296941]Godmode Achieved[/url]
+8. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3162704178]Sacred Dreams[/url]
+9. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2880387531]Revelations[/url]
+10. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3082060097]The Sheriff[/url]
+11. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3372219983]Kicks and Giggles[/url]　　-- End of 2nd update list[/b][/code]
+
+[h2][b]　Credit[/b][/h2]
+[code][b]Character Image: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3386788715]Yet Another Portraits Mod[/url] by Keertt21
+Character Descriptions: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3255660204]Inventory Descriptions[/url] by 리셰[/b][/code]</description>
+    <version>1.5</version>
+    <visibility>Public</visibility>
     <tag id="Lua"/>
     <tag id="Tweaks"/>
     <tag id="Graphics"/>
