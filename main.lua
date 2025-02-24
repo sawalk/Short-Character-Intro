@@ -67,10 +67,9 @@ mod:AddPriorityCallback(
 
 
 ------ 구현 ------
+local sprite = Sprite()
 local function LoadSprite()
     local player = Isaac.GetPlayer(0)
-    local sprite = Sprite()
-
     if player:GetPlayerType() < 41 then
         sprite:Load("kr/popup_character descriptions.anm2")    -- 일반 캐릭터
     else
@@ -80,21 +79,12 @@ end
 
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, LoadSprite)
 
-local function GetScreenSize()
-    local room = Game():GetRoom()
-    local pos = room:WorldToScreenPosition(Vector(0,0)) - room:GetRenderScrollOffset() - Game().ScreenShakeOffset
-    local rx = pos.X + 60 * 26 / 40
-    local ry = pos.Y + 162.5 * (26 / 40)
-    return Vector(rx*2 + 13*26, ry*2 + 7*26)
-end
-
 mod.currentAnim = nil      -- 현재 재생중인 애니메이션 이름
 mod.isAnimating = false    -- 애니메이션이 재생 중인지
 mod.showIn = true          -- 토글 상태: true면 다음은 인 애니메이션, false면 아웃 애니메이션
 
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
     local player = Isaac.GetPlayer(0)
-    local sprite = Sprite()
 
     if not sprite:IsLoaded() then
         LoadSprite()
@@ -116,8 +106,12 @@ mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
         
         sprite.Scale = Vector(scale, scale)
         sprite.Color = Color(1, 1, 1, 1, 0, 0, 0)
-
-        local screenSize = GetScreenSize()
+        
+        local room = Game():GetRoom()
+        local pos = room:WorldToScreenPosition(Vector(0,0)) - room:GetRenderScrollOffset() - Game().ScreenShakeOffset
+        local rx = pos.X + 60 * 26 / 40
+        local ry = pos.Y + 162.5 * (26 / 40)
+        local screenSize = Vector(rx*2 + 13*26, ry*2 + 7*26)
         sprite:Render(Vector(screenSize.X / 1.98, screenSize.Y / 3.333333), Vector(0,0), Vector(0,0))
     end
 
@@ -137,7 +131,8 @@ mod:AddCallback(ModCallbacks.MC_POST_RENDER, function()
             mod.currentAnim = player:GetPlayerType() .. suffix
         end
 
-        if mod.currentAnim and player:GetName() ~= "[TECHNICAL] C-Side Detect" then    -- 에피파니 전용 캐릭터 화면은 제외
+        if Epiphany and player:GetName() == "[TECHNICAL] C-Side Detect" then return end    -- 에피파니 전용 캐릭터 화면은 제외
+        if mod.currentAnim then
             sprite:Play(mod.currentAnim, false)
             SFXManager():Play(playsfx, 0.5)
         end
