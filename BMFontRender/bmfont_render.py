@@ -129,7 +129,7 @@ def render_text(text, bmfont, atlas_images):
     # BMFont common 정보에서 기준(라인 높이, base) 가져오기
     line_height = bmfont.common.get('lineHeight', list(atlas_images.values())[0].height)
     base_line = bmfont.common.get('base', 0)
-    line_spacing = 4  # 줄 사이 간격
+    line_spacing = 4 # 줄 사이 간격
 
     # 각 글자의 위치를 계산하여 전체 텍스트의 bounding box를 구함.
     x_cursor = 0

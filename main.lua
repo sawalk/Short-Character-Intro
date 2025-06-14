@@ -134,12 +134,16 @@ mod:AddPriorityCallback(
         end
 
         local jsonString = mod:LoadData()
-        mod.config = json.decode(jsonString)
-        mod.config.toggleKey = mod.config.toggleKey or Keyboard.KEY_HOME
-        mod.config.language = mod.config.language or 1
-        mod.config.posY = mod.config.posY or 90
-        mod.config.scale = mod.config.scale or 0
-        mod.config.blackout = mod.config.blackout or true
+        local loadedConfig = json.decode(jsonString)
+        mod.config.toggleKey = loadedConfig.toggleKey or Keyboard.KEY_HOME
+        mod.config.language = loadedConfig.language or 1
+        mod.config.posY = loadedConfig.posY or 90
+        mod.config.scale = loadedConfig.scale or 0
+        if loadedConfig.blackout == nil then
+            mod.config.blackout = true
+        else
+            mod.config.blackout = loadedConfig.blackout
+        end
     end
 )
 

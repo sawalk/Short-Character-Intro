@@ -6,7 +6,7 @@
     <description>[h2][b]　What is this[/b][/h2]
 [code][b]The 'Home' key shows a brief description of the character you are currently playing. You can change the toggle key with another key with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2681875787]Mod Config Menu Pure[/url]. Supports English (some unsupported) and Korean.[hr][/hr]Source code: https://github.com/sawalk/Short-Character-Intro (Commits slower than actual development progress.)[/b][/code]
 
-[h2][b]　Roadmap[/b][/h2]  　  We will be updating in the following order The 1st update will take place in early March.
+[h2][b]　Roadmap[/b][/h2]  　  English descriptions of the 1st update will be updated before April.
 [code][b]0. TBoI: R chracaters (English and Korean support)
 1. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3012430463]Epiphany[/url] (only Korean support)
 2. [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3260980911]Astrobirth[/url] (only Korean support)
@@ -22,7 +22,7 @@
 [h2][b]　Credit[/b][/h2]
 [code][b]Character Image: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3386788715]Yet Another Portraits Mod[/url] by Keertt21
 Character Descriptions: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3255660204]Inventory Descriptions[/url] by 리셰[/b][/code]</description>
-    <version>1.12</version>
+    <version>1.14</version>
     <visibility>Public</visibility>
     <tag id="Lua"/>
     <tag id="Tweaks"/>
